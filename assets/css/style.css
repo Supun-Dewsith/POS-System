@@ -1,0 +1,56 @@
+body {
+    font-family: 'Inter', Arial, sans-serif !important;
+}
+html, body {
+    height: 100%;       
+    margin: 0;          
+    padding: 0;         
+    overflow: hidden;   
+}
+
+#searchBar{
+    border:2px solid transparent;
+    border-color: rgb(226, 226, 226);
+    transition: border-color 0.05s ease;
+    box-shadow: none !important;
+  
+}
+
+#searchBar:hover{
+    border-color: orange;
+    /*outline: none;*/ 
+    box-shadow: none !important;
+}
+
+
+.item_container_wrap{
+    height: calc(100vh - 59px);       
+    overflow-y: auto;
+    }
+
+.button{
+    border:2px solid orange;
+    color:orange;
+    background: transparent;
+    padding: 4px 20px;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.button:hover{
+    background-color: orange;
+    color: white;
+}
+
+.quantity-selector .btn{
+    border: 1px;
+    background-color: #f8f9fa;
+}
+
+
+
+@media(max-width:992px) {
+    
+}
