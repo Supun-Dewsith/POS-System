@@ -1,9 +1,5 @@
-//document.addEventListener('DOMContentLoaded', loadItems);
-document.addEventListener('DOMContentLoaded', function () {
-    loadItems();
-    loadCustomers();
+document.addEventListener('DOMContentLoaded', loadItems);
 
-});
 let inventoryData = [
     { name: 'Water (100ml)', code: '#0112', price: '0.85', image: 'assets/img/Untitled.jpeg', alt: 'Water Bottle' },
     { name: 'Apple Juice (250ml)', code: '#0205', price: '1.99', image: 'assets/img/Untitled-1.jpeg', alt: 'Apple Juice Carton' },
@@ -37,38 +33,7 @@ let inventoryData = [
     { name: 'Pet Food (Dog, Small Bag)', code: '#3041', price: '8.50', image: 'assets/img/30.jpeg', alt: 'Small Bag of Dog Food' }
 ];
 
-let customerData = [
-    {
-        name: 'Amal Haybsaab', id: 'C0001', gmail: 'hahaha@gmail.com', orders: [{
-            orderId: 'O001',
-            date: '2025-11-20',
-            total: 55.99,
-            items: ['Product A', 'Product B']
-        },
-        {
-            orderId: 'O002',
-            date: '2025-11-28',
-            total: 12.50,
-            items: ['Product C']
-        }]
-    },
-    {
-        name: 'Amal Haybsaab', id: 'C0001', gmail: 'hahaha@gmail.com', orders: [{
-            orderId: 'O001',
-            date: '2025-11-20',
-            total: 55.99,
-            items: ['Product A', 'Product B']
-        },
-        {
-            orderId: 'O002',
-            date: '2025-11-28',
-            total: 12.50,
-            items: ['Product C']
-        }]
-    }
-
-];
-
+let customerData = [];
 
 const searchBar = document.getElementById('searchBar');
 searchBar.addEventListener('input', loadItems);
@@ -160,10 +125,34 @@ ${styleBlock}
 
 
 let selectedItems = [];
-//const selectedItemSet = new Set(selectedItems);
 
-function createSelectedItemCard(item, count) {
-    return `<div class="d-flex mt-0">
+function createSelectedItemCard(item) {
+
+    const styleBlock2 =
+        `<style>
+            .buttonL {
+                color: orange;
+                padding: 4px 11px;
+                transition: all 0.2s ease;
+            }
+            .buttonL:hover {
+                background-color: orange !important;
+                color: white;
+            }
+            .buttonR {
+                color: orange;
+                padding: 4px 10px;
+                transition: all 0.2s ease;
+            }
+            .buttonR:hover {
+                background-color: orange !important;
+                color: white;
+            }
+        </style>`;
+
+    return `
+    ${styleBlock2}
+    <div class="d-flex mt-0">
                             <div class="col-1">
                                 <button class="btn rounded-3 bg-light ms-2 h2 h-75 w-100" onclick="removeFromSelectedItems('${item.code}')">
                                     <p class="h2" style="">-</p>
@@ -177,13 +166,13 @@ function createSelectedItemCard(item, count) {
                                         style="width: 50px; height: 50px; border-radius: 5px;" class="ms-2">
                                     <p class="mt-3 ms-4">${item.name}</p>
                                     </div>
-                                    <div class="input-group quantity-selector col-4" style="width: 120px;">
-                                        <button class="btn btn-outline-secondary "
-                                            style="background-color:rgb(209, 209, 209);" id="button-minus-${count}">-</button>
-                                        <input type="text" id="itemCount-${count}" class="item-count form-control text-center"
-                                            style="border: 0px;" value=${item.count}>
-                                        <button class="btn btn-outline-secondary "
-                                            style="background-color:rgb(209, 209, 209);" id="button-plus-${count}">+</button>
+                                    <div class="input-group quantity-selector col-4" style="width: 110px;">
+                                        <button class="btn btn-outline-secondary buttonL"
+                                            style="background-color:rgb(209, 209, 209); " id="button-minus-${item.code}">-</button>
+                                        <input type="text" id="itemCount-${item.code}" class="item-count form-control text-center"
+                                            style="border: 0px; padding-left:10px;" value=${item.count}>
+                                        <button class="btn btn-outline-secondary buttonR"
+                                            style="background-color:rgb(209, 209, 209);" id="button-plus-${item.code}">+</button>
                                     </div>
                                     <div class="pe-3 col-2">
                                         <p class="card-text font-weight-bold h5 mb-0">$ ${item.price}</p>
@@ -213,10 +202,10 @@ function loadSelectedItems(name, code, price, image, alt) {
     }
     let i = 0;
     selectedItems.forEach(item => {
-        selectedItemHtml += createSelectedItemCard(item, i);
+        selectedItemHtml += createSelectedItemCard(item);
         i++;
     });
-
+    updatePaymentDetails();
     if (selectedItemHtml === '') {
         selectedItemHtml += `<p  class="h5 col-12 text-center">Selected items will apear here...</p>`;
     }
@@ -225,9 +214,9 @@ function loadSelectedItems(name, code, price, image, alt) {
     //const previousHtml = selectedItemHtml.innerHTML;
     selectedItenContainer.innerHTML = selectedItemHtml;
 
-    for (let i = 0; i < selectedItems.length; i++) {
-        updateCount(i);
-    }
+    selectedItems.forEach(item => {
+        updateCount(item.code);
+    });
 }
 
 
@@ -245,32 +234,42 @@ function removeFromSelectedItems(code) {
     }
     selectedItenContainer.innerHTML = selectedItemHtml;
 
+    selectedItems.forEach(item => {
+        updateCount(item.code);
+    });
+    updatePaymentDetails();
+
+
 }
 
-function updateCount(uniqueId) {
-    const minusButton = document.getElementById(`button-minus-${uniqueId}`);
-    const plusButton = document.getElementById(`button-plus-${uniqueId}`);
-    const countInput = document.getElementById(`itemCount-${uniqueId}`);
+function updateCount(itemCode) {
+    const minusButton = document.getElementById(`button-minus-${itemCode}`);
+    const plusButton = document.getElementById(`button-plus-${itemCode}`);
+    const countInput = document.getElementById(`itemCount-${itemCode}`);
 
-    let count = parseInt(countInput.value, 10);
+    const targetItem = selectedItems.find(item => item.code === itemCode);
+    if (!targetItem) return;
+
+    let count = targetItem.count;
 
     plusButton.addEventListener('click', () => {
         count++;
         countInput.value = count;
-        const targetItem = selectedItems[uniqueId];
         targetItem.count = count;
+        updatePaymentDetails();
     });
 
     minusButton.addEventListener('click', () => {
         if (count > 1) {
             count--;
             countInput.value = count;
-            const targetItem = selectedItems[uniqueId];
             targetItem.count = count;
+            updatePaymentDetails();
         }
     });
-}
 
+
+}
 
 
 //clear Button
@@ -289,80 +288,127 @@ clearButton.addEventListener('click', () => {
             selectedItemHtml += `<p  class="h5 col-12 text-center" >Selected items will apear here...</p>`;
         }
         selectedItenContainer.innerHTML = selectedItemHtml;
+        updatePaymentDetails();
     }
 
 });
 
-//home HTML
+document.addEventListener('DOMContentLoaded', function () {
+    const addButton = document.getElementById('pay-button');
+    const formContainer = document.getElementById('new-customer-form-container');
 
-function loadCustomers() {
-    const customerContainer = document.getElementById('customer-container');
-    let customerHtml = '';
+
+    if (!addButton || !formContainer) {
+        console.error("Missing 'Add Customer' button or form container.");
+        return;
+    }
+
+    addButton.addEventListener('click', () => {
+        if (formContainer.style.display === 'none') {
+            formContainer.style.display = 'block';
+        } else {
+            formContainer.style.display = 'none';
+        }
+    });
+});
+
+const submitButton = document.getElementById('submit-new-customer');
+const nameInput = document.getElementById('new-customer-name');
+const gmailInput = document.getElementById('new-customer-gmail');
+
+submitButton.addEventListener('click', function () {
+    const newName = nameInput.value.trim();
+    const newGmail = gmailInput.value.trim();
+
+    let isExist = false;
     let i = 0;
     customerData.forEach(customer => {
-        customerHtml += createCustomerContainer(customer, i);
+        if (customer.gmail === newGmail) {
+            isExist = true;
+
+            const now = new Date();
+            const nextOrderId = 'O' + (customerData.length + 1).toString().padStart(4, '0');
+            const date_time = now.toLocaleString();
+
+            let selectedItemCodes=[];
+            selectedItems.forEach(item=>{
+                selectedItemCodes.push({itemCode:item.code,itemCount:item.count});
+            });
+
+            const newOrder = {
+                orderId: nextOrderId,
+                date: date_time,
+                total: totalCost,
+                items: selectedItemCodes
+            };
+            customerData[i].orders.push(newOrder);
+            updateOrderIdLabel(nextOrderId);
+        }
         i++;
+        
     });
 
-    customerContainer.innerHTML = customerHtml;
-    for (let i = 0; i < selectedItems.length; i++) {
-        loadOrders(i);
+    
+    if (!isExist) {
+        if (newGmail && newName) {
+            const nextId = 'C' + (customerData.length + 1).toString().padStart(4, '0');
+            const newCustomer = {
+                name: newName,
+                id: nextId,
+                gmail: newGmail,
+                orders: []
+            };
+
+            const now = new Date();
+            const nextOrderId = 'O' + (customerData.length + 1).toString().padStart(4, '0');
+            const date_time = now.toLocaleString();
+
+            let selectedItemCodes=[];
+            selectedItems.forEach(item=>{
+                selectedItemCodes.push({itemCode:item.code,itemCount:item.count});
+            });
+
+            const newOrder = {
+                orderId: nextOrderId,
+                date: date_time,
+                total: totalCost,
+                items: selectedItemCodes
+            };
+
+            newCustomer.orders.push(newOrder)
+            customerData.push(newCustomer);
+            updateOrderIdLabel(nextOrderId);
+        }
     }
-}
+    //test log
+    console.log(customerData);
+});
 
+let totalCost = 0;
+function updatePaymentDetails() {
+    const subtotal = document.getElementById('subtotal');
+    const discount = document.getElementById('discount');
+    const salseTax = document.getElementById('salse-tax');
+    const total = document.getElementById('total');
 
-
-function loadOrders(i) {
-    const orderContainer = document.getElementById('orders-container-container');
-    const orderButton = document.getElementById('Orders-button-${i}');
-
-    orderButton.addEventListener('click', () => {
-        let orderHtml = '';
-        customerData[i].orders.forEach(order => {
-            orderHtml += createOrderContainers(order);
-        });
+    let val = 0;
+    selectedItems.forEach(item => {
+        val += item.price * item.count;
     });
 
+    let dis = 0.05;
+    let st = 0.05;
+    subtotal.textContent = '$' + val.toFixed(2);
+    discount.textContent = '$' + (val * dis).toFixed(2);
+    salseTax.textContent = '$' + (val * st).toFixed(2);
+    totalCost=val + val * dis + val * st;
+    total.textContent = '$' + totalCost.toFixed(2);
 
-    orderContainer.innerHTML = orderHtml;
+}
+
+function updateOrderIdLabel(orderId){
+const orderIdLabel = document.getElementById('order-id');
+    orderIdLabel.textContent = 'Order Number : '+orderId;
 }
 
 
-function createCustomerContainer(customer, i) {
-    return `<div class="d-flex mt-0">
-                                <div class="col-12 pe-3" style="height: 60px;">
-                                    <div class=" rounded-3 ms-3 d-flex flex-row align-items-center bg-light h-100">
-                                        <div class="col-4 ps-4">
-                                            <p class="font-weight-bold h5 mb-0">Customer Name : ${customer.name}</p>
-                                        </div>
-                                        <div class=" col-4" style="">
-                                            <p class="font-weight-bold h5 mb-0">Customer ID : ${customer.id}</p>
-                                        </div>
-                                        <div class="pe-4 col-4" style="text-align: end;">
-                                            <button class="button ms-2" id="Orders-button-${i}"
-                                                style="width: 200px;">
-                                                Orders</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>`;
-}
-
-
-function createOrderContainers(order) {
-    return `<div class="d-flex mt-0">
-                            <div class="col-12 pe-3" style="height: 60px;">
-                                <div class=" rounded-3 ms-3 d-flex flex-row align-items-center bg-light h-100">
-                                    <div class="col-4 ps-4">
-                                        <p class="font-weight-bold h5 mb-0">Order ID : ${order.id}</p>
-                                    </div>
-                                    <div class=" col-4" style="">
-                                        <p class="font-weight-bold h5 mb-0">Order Date : ${order.date}</p>
-                                    </div>
-                                    <div class="pe-4 col-4" style="text-align: end;">
-                                        <p class=" font-weight-bold h5 mb-0">Total : $ ${order.total}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>`;
-}
