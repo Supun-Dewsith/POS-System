@@ -1,4 +1,4 @@
-import { initHomePage } from "./home.js";
+import { initCustomerPage } from "./customer.js";
 import { initCartPage } from "./cart.js";
 import { initProductsPage } from "./products.js";
 
@@ -8,7 +8,7 @@ export function loadPage(pageName) {
         .then(html => {
             document.getElementById("content").innerHTML = html;
 
-            if (pageName === "home") initHomePage();
+            if (pageName === "customer") initCustomerPage();
             if (pageName === "cart") initCartPage();
             if (pageName === "products") initProductsPage();
         });

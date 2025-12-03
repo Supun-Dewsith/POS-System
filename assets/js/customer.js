@@ -1,12 +1,9 @@
 import { inventoryData,customerData } from "./data.js";
 
-export function initHomePage(){
+export function initCustomerPage(){
     loadCustomers();
     setupAddCustomerButton();
 }
-
-
-//document.addEventListener('DOMContentLoaded', loadCustomers);
 
 function loadCustomers() {
     const customerContainer = document.getElementById('customer-container');
@@ -24,7 +21,6 @@ function loadCustomers() {
         console.log('cccccc' + i)
     }
 }
-
 
 
 function loadOrders(i) {
@@ -102,50 +98,3 @@ function setupAddCustomerButton() {
         }
     });
 }
-
-/*
-const submitButton = document.getElementById('submit-new-customer');
-const nameInput = document.getElementById('new-customer-name');
-const gmailInput = document.getElementById('new-customer-gmail');
-
-
-submitButton.addEventListener('click', function () {
-    const newName = nameInput.value.trim();
-    const newGmail = gmailInput.value.trim();
-
-    let isExist = false;
-    customerData.forEach(customer => {
-        if (customer.gmail === newGmail) {
-            isExist = true;
-
-            const now = new Date();
-            const nextOrderId = 'O' + (customerData.length + 1).toString().padStart(4, '0');
-            const date_time = now.toLocaleString();
-
-            const newOrder = {orderId: nextOrderId,
-            date: date_time,
-            total: 55.99,
-            items: ['Product A', 'Product B']};
-
-            customerData.order.push(customer.order.length)
-
-        }
-    });
-
-    if (!isExist) {
-        if (newGmail && newName) {
-            const nextId = 'C' + (customerData.length + 1).toString().padStart(4, '0');
-            const newCustomer = {
-                name: newName,
-                id: nextId,
-                gmail: newGmail,
-                orders: []
-            };
-
-            customerData.push(newCustomer);
-            
-        }
-    }
-
-
-});*/

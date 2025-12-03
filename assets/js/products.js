@@ -12,12 +12,6 @@ export function initProductsPage() {
 
 }
 
-//document.addEventListener('DOMContentLoaded', loadItems);
-
-
-
-
-
 
 function loadItems() {
     const itemCotainer = document.getElementById('item-container');
