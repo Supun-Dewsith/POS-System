@@ -38,7 +38,7 @@ body {
     border-radius: 5px;
     margin-right: 10px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.1s ease;
 }
 
 .button:hover {
@@ -83,5 +83,57 @@ body {
     border-color: orange !important;
 }
 
+.new-item-form-container {
+    border: 2px solid !important;
+    border-color: orange !important;
+    padding: 15px;
+    margin-top: 10px;
+    margin-right: 15px;
+    border-radius: 7px;
+}
+
+/* Make all inputs + button equal size */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+}
+
+.form-grid > * {
+    height: 45px;
+}
+.custom-col-itemContainer{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 180px));
+    gap: 12px;
+}
+.input-field {
+    border: 2px solid transparent !important;
+    border-color: rgb(226, 226, 226) !important;
+    transition: border-color 0.05s ease;
+    box-shadow: none !important;
+
+}
+
+.input-field:hover {
+    border-color: orange !important;
+    /*outline: none;*/
+    box-shadow: none !important;
+}
+
+.button-disabled {
+    opacity: 0.5;    
+    pointer-events: none; 
+    cursor: not-allowed;  
+    transition: none; 
+    background-color: orange;
+    color: white;
+   
+}
+
+.card-active{
+    background-color: orange;
+    color: white;
+}
 
 @media(max-width:992px) {}

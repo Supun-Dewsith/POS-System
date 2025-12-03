@@ -1,0 +1,42 @@
+<div class="d-flex col">
+    <div class="col-0">
+        <div class="d-flex h-100" style="">
+            <div class="vr"></div>
+        </div>
+    </div>
+    <div class="ps-3 h-100 w-100">
+        <div class="bg-light" style="margin-left:-17px;">
+            <div class="d-flex pt-2 pb-2">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class=" mt-0 d-flex gap-2" style="margin-left: 10%; margin-right: 10%;">
+                        <input type="text" class="form-control p-2 rounded-2" placeholder="Search items..."
+                            id="searchBar">
+                        <button class="button me-0" id="add-Item-button" style="width: 200px;">Add Item</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr class="mt-0 mb-0" style="margin-left: -73px;">
+        <div class="new-item-form-container" id="new-item-form-container" style="display: none;">
+            <h3>New Item Details</h3>
+            <div class="form-grid">
+                <input class="form-control mt-2 input-field" type="text" id="new-item-name" placeholder="Item Name">
+                <input class="form-control mt-2 input-field " type="text" id="new-item-code" placeholder="Item Code">
+                <input class="form-control mt-2 input-field " type="text" id="new-item-price" placeholder="Price">
+                <input class="form-control mt-2 input-field " type="text" id="new-item-img" placeholder="image">
+                <button class="button mt-2" id="submit-new-item">Save
+                </button>
+
+            </div>
+        </div>
+        <div class="flex-grow-1 w-100">
+            <div class="item_container_wrap w-100">
+                <h4 class="pt-3">Select items to remove</h4>
+                <div class="d-flex flex-wrap gap-3 mb-3 mt-3 w-100" id="item-container" style="">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
