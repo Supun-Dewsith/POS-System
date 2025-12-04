@@ -1,0 +1,35 @@
+let inventoryData = [
+    { name: 'Water (100ml)', code: '#0112', price: '0.85', image: 'assets/img/Untitled.jpeg', alt: 'Water Bottle' },
+    { name: 'Apple Juice (250ml)', code: '#0205', price: '1.99', image: 'assets/img/Untitled-1.jpeg', alt: 'Apple Juice Carton' },
+    { name: 'Sandwich (Ham)', code: '#0330', price: '4.50', image: 'assets/img/Untitled-2.jpeg', alt: 'Ham Sandwich' },
+    { name: 'Cola (250ml)', code: '#0415', price: '1.25', image: 'assets/img/Untitled-3.jpeg', alt: 'Can of Cola' },
+    { name: 'Chocolate Bar (Milk)', code: '#0522', price: '1.50', image: 'assets/img/5.jpeg', alt: 'Milk Chocolate Bar' },
+    { name: 'Bag of Chips (Salted)', code: '#0601', price: '1.10', image: 'assets/img/06.jpeg', alt: 'Salted Chips Bag' },
+    { name: 'Coffee (Instant)', code: '#0745', price: '3.99', image: 'assets/img/07.jpeg', alt: 'Instant Coffee Jar' },
+    { name: 'Tea Bags (English Breakfast)', code: '#0880', price: '2.50', image: 'assets/img/08.jpeg', alt: 'Tea Box' },
+    { name: 'Milk (1L)', code: '#0910', price: '1.80', image: 'assets/img/09.jpeg', alt: 'Milk Carton' },
+    { name: 'Bread (Whole Wheat)', code: '#1055', price: '2.20', image: 'assets/img/10.jpeg', alt: 'Loaf of Bread' },
+    { name: 'Yogurt (Strawberry)', code: '#1133', price: '0.99', image: 'assets/img/11.jpeg', alt: 'Strawberry Yogurt Cup' },
+    { name: 'Eggs (Dozen)', code: '#1270', price: '3.15', image: 'assets/img/12.jpeg', alt: 'Egg Carton' },
+    { name: 'Orange Juice (1L)', code: '#1305', price: '2.49', image: 'assets/img/13.jpeg', alt: 'Orange Juice Bottle' },
+    { name: 'Tuna Can (In Oil)', code: '#1460', price: '1.75', image: 'assets/img/14.jpeg', alt: 'Tuna Can' },
+    { name: 'Pasta (Spaghetti)', code: '#1590', price: '1.30', image: 'assets/img/15.jpeg', alt: 'Spaghetti Bag' },
+    { name: 'Tomato Sauce (Jar)', code: '#1620', price: '2.85', image: 'assets/img/16.jpeg', alt: 'Tomato Sauce Jar' },
+    { name: 'Cereal (Oats)', code: '#1711', price: '4.20', image: 'assets/img/17.jpeg', alt: 'Oatmeal Box' },
+    { name: 'Butter (250g)', code: '#1844', price: '2.99', image: 'assets/img/18.jpeg', alt: 'Butter Stick' },
+    { name: 'Cheese (Cheddar Block)', code: '#1902', price: '5.50', image: 'assets/img/19.jpeg', alt: 'Cheddar Cheese Block' },
+    { name: 'Soup (Chicken Noodle)', code: '#2077', price: '1.65', image: 'assets/img/20.jpeg', alt: 'Can of Soup' },
+    { name: 'Banana (Single)', code: '#2150', price: '0.45', image: 'assets/img/21.jpeg', alt: 'Single Banana' },
+    { name: 'Grapes (Red, 500g)', code: '#2299', price: '3.70', image: 'assets/img/22.jpeg', alt: 'Bag of Grapes' },
+    { name: 'Detergent (Laundry)', code: '#2318', price: '6.99', image: 'assets/img/23.jpeg', alt: 'Laundry Detergent Bottle' },
+    { name: 'Soap (Bar)', code: '#2435', price: '0.75', image: 'assets/img/24.jpeg', alt: 'Bar of Soap' },
+    { name: 'Toothpaste (Mint)', code: '#2562', price: '1.99', image: 'assets/img/25.jpeg', alt: 'Toothpaste Tube' },
+    { name: 'Shampoo (Volume)', code: '#2604', price: '3.50', image: 'assets/img/26.jpeg', alt: 'Shampoo Bottle' },
+    { name: 'Paper Towels (Roll)', code: '#2788', price: '2.10', image: 'assets/img/27.jpeg', alt: 'Roll of Paper Towels' },
+    { name: 'Light Bulb (LED)', code: '#2807', price: '4.99', image: 'assets/img/28.jpeg', alt: 'LED Light Bulb' },
+    { name: 'Batteries (AA Pack)', code: '#2913', price: '5.20', image: 'assets/img/29.jpeg', alt: 'AA Battery Pack' },
+    { name: 'Pet Food (Dog, Small Bag)', code: '#3041', price: '8.50', image: 'assets/img/30.jpeg', alt: 'Small Bag of Dog Food' }
+];
+let customerData = [];
+
+export{inventoryData,customerData};
